@@ -1,0 +1,62 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "karshachamling-api",
+  "main": "src/worker.py",
+  "compatibility_date": "2026-11-20",
+  "compatibility_flags": ["python_workers"],
+
+  // Serve the API at api.karshachamling.org (uncomment once the domain is on Cloudflare)
+  // "routes": [{ "pattern": "api.karshachamling.org", "custom_domain": true }],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "karshachamling",
+      // Replace with the id printed by:  npx wrangler d1 create karshachamling
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    { "binding": "MEDIA", "bucket_name": "karshachamling-media" }
+  ],
+
+  // Non-secret settings. Secrets (JWT_SECRET, RAZORPAY_KEY_SECRET, ...) are set with
+  // `npx wrangler secret put NAME` in production and in .dev.vars locally.
+  "vars": {
+    "ENV": "development",
+    "CORS_ORIGINS": "http://localhost:5173",
+    "MEDIA_PUBLIC_BASE_URL": "http://localhost:8787/media",
+    "MAX_UPLOAD_MB": "15",
+    "MIN_DONATION_INR": "10"
+  },
+
+  "env": {
+    "production": {
+      "vars": {
+        "ENV": "production",
+        "CORS_ORIGINS": "https://karshachamling.org,https://www.karshachamling.org",
+        "COOKIE_DOMAIN": ".karshachamling.org",
+        "MEDIA_PUBLIC_BASE_URL": "https://media.karshachamling.org",
+        "MAX_UPLOAD_MB": "15",
+        "MIN_DONATION_INR": "10"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "karshachamling",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations"
+        }
+      ],
+      "r2_buckets": [
+        { "binding": "MEDIA", "bucket_name": "karshachamling-media" }
+      ]
+    }
+  },
+
+  // Image resizing is CPU-heavy (a 12 MP photo can take several seconds). Needs Workers Paid.
+  "limits": { "cpu_ms": 60000 },
+
+  "observability": { "enabled": true }
+}

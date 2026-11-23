@@ -1,0 +1,40 @@
+[project]
+name = "karshachamling-backend"
+version = "0.2.0"
+description = "API and admin backend for karshachamling.org (Cloudflare Python Worker + D1 + R2)"
+requires-python = ">=3.13"
+# Runtime dependencies are bundled into the Worker by pywrangler
+dependencies = [
+    "argon2-cffi",
+    "email-validator",
+    "fastapi",
+    "nh3",
+    "pillow",
+    "pyjwt",
+    "python-multipart",
+]
+
+[dependency-groups]
+dev = [
+    "httpx",
+    "pytest",
+    "ruff",
+    "workers-py",
+    "workers-runtime-sdk",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+# FastAPI's Depends()/Query() defaults are the intended style
+ignore = ["B008", "UP046"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]

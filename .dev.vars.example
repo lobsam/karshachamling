@@ -1,0 +1,20 @@
+# Local secrets for `uv run pywrangler dev`. Copy to .dev.vars (never commit it).
+# In production set each one with:  npx wrangler secret put NAME --env production
+
+JWT_SECRET=local-development-secret-change-me-0123456789abcdef
+
+# Razorpay test keys (Dashboard → Test mode → API keys / Webhooks)
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+RAZORPAY_WEBHOOK_SECRET=
+
+# Cloudflare Turnstile secret for the contact form; empty = no spam check
+TURNSTILE_SECRET=
+
+# Cloudflare Pages deploy hook URL; empty = don't rebuild the site on publish
+CF_PAGES_DEPLOY_HOOK=
+
+# Email notification for new contact messages (https://resend.com); empty = off
+RESEND_API_KEY=
+EMAIL_FROM=
+NOTIFY_EMAIL=
