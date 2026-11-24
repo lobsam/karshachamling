@@ -325,3 +325,12 @@ def test_disabled_user_is_signed_out(admin):
     uid = c.get("/auth/me").json()["id"]
     admin.patch(f"/admin/users/{uid}", json={"is_active": False})
     assert c.get("/auth/me").status_code == 401
+
+
+def test_docs_hidden_in_production_unless_enabled(ctx, client):
+    ctx.settings.env = "production"
+    assert client.get("/docs").status_code == 404
+    assert client.get("/openapi.json").status_code == 404
+    ctx.settings.enable_docs = True
+    assert client.get("/docs").status_code == 200
+    assert client.get("/openapi.json").status_code == 200

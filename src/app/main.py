@@ -17,7 +17,8 @@ def create_app() -> FastAPI:
         """CORS + hiding API docs in production. Done by hand because the allowed origins
         come from Worker vars, which are only known per request."""
         settings = get_ctx(request).settings
-        if settings.is_production and request.url.path.startswith(DOCS_PATHS):
+        hide_docs = settings.is_production and not settings.enable_docs
+        if hide_docs and request.url.path.startswith(DOCS_PATHS):
             return JSONResponse({"detail": "Not Found"}, status_code=404)
 
         origin = request.headers.get("origin")

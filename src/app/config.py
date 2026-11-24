@@ -27,6 +27,9 @@ class Settings(BaseModel):
 
     turnstile_secret: str = ""
 
+    # Show the interactive API docs (/docs) in production too
+    enable_docs: bool = False
+
     resend_api_key: str = ""
     email_from: str = ""
     notify_email: str = ""
