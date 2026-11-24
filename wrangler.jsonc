@@ -31,8 +31,11 @@
 	},
 	"env": {
 		"production": {
-			// Serve the API at api.karshachamling.org (uncomment once the domain is on Cloudflare)
-			"routes": [{ "pattern": "api.karshachamling.org", "custom_domain": true }],
+			// Serve the API at api.karshachamling.org. Uncomment only once karshachamling.org is in
+			// the SAME Cloudflare account as this Worker; then set workers_dev to false.
+			// "routes": [{ "pattern": "api.karshachamling.org", "custom_domain": true }],
+			"workers_dev": true, // https://karshachamling-api-production.<account>.workers.dev
+			"preview_urls": false,
 			"vars": {
 				"ENV": "production",
 				"CORS_ORIGINS": "https://karshachamling.org,https://www.karshachamling.org",
