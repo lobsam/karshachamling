@@ -32,7 +32,7 @@
 	"env": {
 		"production": {
 			// Serve the API at api.karshachamling.org (uncomment once the domain is on Cloudflare)
-			// "routes": [{ "pattern": "api.karshachamling.org", "custom_domain": true }],
+			"routes": [{ "pattern": "api.karshachamling.org", "custom_domain": true }],
 			"vars": {
 				"ENV": "production",
 				"CORS_ORIGINS": "https://karshachamling.org,https://www.karshachamling.org",
