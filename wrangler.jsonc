@@ -38,8 +38,7 @@
 			"preview_urls": false,
 			"vars": {
 				"ENV": "production",
-				"CORS_ORIGINS": "https://karshachamling.org,https://www.karshachamling.org",
-				"COOKIE_DOMAIN": ".karshachamling.org",
+				"CORS_ORIGINS": "https://karshachamling.org,https://www.karshachamling.org,https://karshachamling-frontend.sanduplobzang.workers.dev",
 				"MEDIA_PUBLIC_BASE_URL": "https://media.karshachamling.org",
 				"MAX_UPLOAD_MB": "15",
 				"MIN_DONATION_INR": "10",
